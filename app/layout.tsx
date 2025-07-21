@@ -3,7 +3,7 @@ import './globals.css'
 import Script from 'next/script'
 
 export const metadata: Metadata = {
-  title: 'v0 App',
+  title: 'Annual Flu Shots',
   description: 'Created with v0',
   generator: 'v0.dev',
 }
