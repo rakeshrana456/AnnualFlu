@@ -85,14 +85,6 @@ const handelWhatsApp = () => {
     console.warn('gtag is not defined yet');
   }
 };
-
-
-
-
-
-
-
-
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
@@ -133,33 +125,12 @@ const handelWhatsApp = () => {
           ))}
         </nav>
 
-        {/* Call / WhatsApp Buttons */}
-        {/* <div className="hidden sm:flex items-center space-x-3">
-          <a href="tel:9570009000">
-            <Button
-              variant="outline"
-              className="bg-blue-600 hover:bg-blue-700 text-white hover:text-white"
-            >
-              <Phone className="w-4 h-4 mr-2" />
-              Call Now
-            </Button>
-          </a>
-          <a
-            href="https://wa.me/919570009000"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Button className="bg-green-600 hover:bg-green-700 text-white">
-              <FontAwesomeIcon icon={faWhatsapp} className="w-5 h-5 mr-2" />
-              WhatsApp
-            </Button>
-          </a>
-        </div> */}
+        
         <div className="flex flex-row space-y-0 pt-2 lg:gap-2">
             <a href="tel:9570009000">
                   <Button className="w-[90%] sm:w-[102px] sm:gap-0 lg:w-full bg-blue-600 hover:bg-blue-700 text-white" onClick={handelCallNow}>
                   <Phone className="w-4 h-4 mr-2" />
-                Call Now 
+                  <span className="hidden lg:inline ml-2">Call Now</span>
               </Button>
             </a>
             <a
@@ -169,47 +140,19 @@ const handelWhatsApp = () => {
             >
               <Button className=" w-[80%] sm:w-[120px] w-full bg-green-600 hover:bg-green-700 text-white" onClick={handelWhatsApp}>
                 <FontAwesomeIcon icon={faWhatsapp} className="w-5 h-5 mr-2" />
-                WhatsApp
+                 <span className="hidden lg:inline ml-2">WhatsApp</span>
               </Button>
             </a>
           </div> 
 
         {/* Hamburger Icon */}
         <div className="md:hidden mt-5" >
-
-      {/* <div className="flex flex-col   space-y-0 pt-2">
-            <a href="tel:9570009000">
-              <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white " >
-                <Phone className="w-4 h-4 mr-2" />
-                Call Now 
-              </Button>
-            </a>
-            <a
-              href="https://wa.me/919570009000"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Button className="w-full bg-green-600 hover:bg-green-700 text-white">
-                <FontAwesomeIcon icon={faWhatsapp} className="w-5 h-5 mr-2" />
-                WhatsApp
-              </Button>
-            </a>
-          </div>  */}
-
-
-
           <button
             onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}
             className="text-gray-700 focus:outline-none"
           >
             {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
-
-    
-
-
-
-
         </div>
       </div>
 
@@ -234,25 +177,7 @@ const handelWhatsApp = () => {
             </Link>
           ))}
 
-          {/* Mobile Buttons */}
-          {/* <div className="flex flex-col space-y-2 pt-2">
-            <a href="tel:9570009000">
-              <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white " >`
-                <Phone className="w-4 h-4 mr-2" />
-                Call Now 
-              </Button>
-            </a>
-            <a
-              href="https://wa.me/919570009000"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Button className="w-full bg-green-600 hover:bg-green-700 text-white">
-                <FontAwesomeIcon icon={faWhatsapp} className="w-5 h-5 mr-2" />
-                WhatsApp
-              </Button>
-            </a>
-          </div> */}
+          
         </div>
       )}
     </header>
