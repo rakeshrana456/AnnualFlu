@@ -57,7 +57,42 @@ export default function AnnualFluShots() {
 
  
 };
-  
+
+
+
+const handelCallNow = () => {
+  if (typeof window.gtag === 'function') {
+    window.gtag('event', 'schedule_consultation', {
+      send_to: 'AW-17014939967/JzZ2CL-5oboaEL_CrbE_',
+      value: 1.0,
+      currency: 'INR',
+    });
+    console.log('Conversion tracked: schedule_consultation');
+  } else {
+    console.warn('gtag is not defined yet');
+  }
+};
+
+const handelWhatsApp = () => {
+  if (typeof window.gtag === 'function') {
+    window.gtag('event', 'schedule_consultation', {
+      send_to: 'AW-17014939967/JzZ2CL-5oboaEL_CrbE_',
+      value: 1.0,
+      currency: 'INR',
+    });
+    console.log('Conversion tracked: schedule_consultation');
+  } else {
+    console.warn('gtag is not defined yet');
+  }
+};
+
+
+
+
+
+
+
+
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
@@ -66,7 +101,8 @@ export default function AnnualFluShots() {
       <header className="bg-white shadow-sm border-b sticky top-0 z-50">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         {/* Logo */}
-        <div className="flex items-center space-x-3">
+        <div className="flex items-center space-x-3" >
+          <a href="#annual_flu">
           <Image
             src="/images/dr-morepen-logo.png"
             alt="Dr. Morepen Home Logo"
@@ -74,6 +110,7 @@ export default function AnnualFluShots() {
             height={60}
             className="h-12 w-auto"
           />
+          </a>
         </div>
 
         {/* Desktop Nav */}
@@ -97,7 +134,7 @@ export default function AnnualFluShots() {
         </nav>
 
         {/* Call / WhatsApp Buttons */}
-        <div className="hidden sm:flex items-center space-x-3">
+        {/* <div className="hidden sm:flex items-center space-x-3">
           <a href="tel:9570009000">
             <Button
               variant="outline"
@@ -117,16 +154,62 @@ export default function AnnualFluShots() {
               WhatsApp
             </Button>
           </a>
-        </div>
+        </div> */}
+        <div className="flex flex-row space-y-0 pt-2 lg:gap-2">
+            <a href="tel:9570009000">
+                  <Button className="w-[90%] sm:w-[102px] sm:gap-0 lg:w-full bg-blue-600 hover:bg-blue-700 text-white" onClick={handelCallNow}>
+                  <Phone className="w-4 h-4 mr-2" />
+                Call Now 
+              </Button>
+            </a>
+            <a
+              href="https://wa.me/919570009000"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button className=" w-[80%] sm:w-[120px] w-full bg-green-600 hover:bg-green-700 text-white" onClick={handelWhatsApp}>
+                <FontAwesomeIcon icon={faWhatsapp} className="w-5 h-5 mr-2" />
+                WhatsApp
+              </Button>
+            </a>
+          </div> 
 
         {/* Hamburger Icon */}
-        <div className="md:hidden">
+        <div className="md:hidden mt-5" >
+
+      {/* <div className="flex flex-col   space-y-0 pt-2">
+            <a href="tel:9570009000">
+              <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white " >
+                <Phone className="w-4 h-4 mr-2" />
+                Call Now 
+              </Button>
+            </a>
+            <a
+              href="https://wa.me/919570009000"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button className="w-full bg-green-600 hover:bg-green-700 text-white">
+                <FontAwesomeIcon icon={faWhatsapp} className="w-5 h-5 mr-2" />
+                WhatsApp
+              </Button>
+            </a>
+          </div>  */}
+
+
+
           <button
             onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}
             className="text-gray-700 focus:outline-none"
           >
             {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
+
+    
+
+
+
+
         </div>
       </div>
 
@@ -152,7 +235,7 @@ export default function AnnualFluShots() {
           ))}
 
           {/* Mobile Buttons */}
-          <div className="flex flex-col space-y-2 pt-2">
+          {/* <div className="flex flex-col space-y-2 pt-2">
             <a href="tel:9570009000">
               <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white " >`
                 <Phone className="w-4 h-4 mr-2" />
@@ -169,13 +252,13 @@ export default function AnnualFluShots() {
                 WhatsApp
               </Button>
             </a>
-          </div>
+          </div> */}
         </div>
       )}
     </header>
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-blue-50 via-white to-orange-50 py-20">
+      <section className="bg-gradient-to-br from-blue-50 via-white to-orange-50 py-20" id="annual_flu">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left side - Content */}
