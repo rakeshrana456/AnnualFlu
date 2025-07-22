@@ -125,13 +125,14 @@ const handelWhatsApp = () => {
           ))}
         </nav>
 
-        
-        <div className="flex flex-row space-y-0 pt-2 lg:gap-2">
+        <div className="flex flex-row pt-2" style={{ gap: '5px' }}>
+
             <a href="tel:9570009000">
-                  <Button className="w-[90%] sm:w-[102px] sm:gap-0 lg:w-full bg-blue-600 hover:bg-blue-700 text-white" onClick={handelCallNow}>
-                  <Phone className="w-4 h-4 mr-2" />
-                  <span className="hidden lg:inline ml-2">Call Now</span>
-              </Button>
+                  <Button className="w-auto sm:w-[80px] lg:w-full bg-blue-600 hover:bg-blue-700 text-white" onClick={handelCallNow}>
+  <Phone className="w-3 h-4 mr-2" />
+ <span className="hidden lg:inline ml-2">Call Now</span>
+</Button>
+
             </a>
             <a
               href="https://wa.me/919570009000"
@@ -139,8 +140,8 @@ const handelWhatsApp = () => {
               rel="noopener noreferrer"
             >
               <Button className=" w-[80%] sm:w-[120px] w-full bg-green-600 hover:bg-green-700 text-white" onClick={handelWhatsApp}>
-                <FontAwesomeIcon icon={faWhatsapp} className="w-5 h-5 mr-2" />
-                 <span className="hidden lg:inline ml-2">WhatsApp</span>
+                <FontAwesomeIcon icon={faWhatsapp} className="w-5 h-5 mr-0 sm:mr-2" />
+                 <span className="hidden lg:inline m">WhatsApp</span>
               </Button>
             </a>
           </div> 
