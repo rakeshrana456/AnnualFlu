@@ -17,16 +17,12 @@ export default function RootLayout({
     <html lang="en">
       <head>
         {/* Google Ads Global Site Tag (gtag.js) */}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=AW-17014939967"
-          strategy="afterInteractive"
-        />
-        <Script id="gtag-init" strategy="afterInteractive">
+         <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17014939967"></script>
+        <Script>
           {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){ dataLayer.push(arguments); }
-            gtag('js', new Date());
-            gtag('config', 'AW-17014939967');
+            window.dataLayer = window.dataLayer || []; 
+            function gtag(){dataLayer.push(arguments);} 
+            gtag('js', new Date()); gtag('config', 'AW-17014939967');
           `}
         </Script>
       </head>
