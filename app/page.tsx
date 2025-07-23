@@ -4,6 +4,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useState } from 'react';
 import { Menu, X, } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import emailjs from 'emailjs-com';
 
 // import {FluShot} from "@app/Public/Images/FluShot"
 import {
@@ -44,95 +46,133 @@ import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 
 export default function AnnualFluShots() {
   const handleCallClick = () => {
-  if (typeof window.gtag === 'function') {
-    window.gtag('event', 'conversion', {
-      send_to: 'AW-17014939967/JzZ2CL-5oboaEL_CrbE_',
-      value: 1.0,
-      currency: 'INR',
-    });
-    console.log(' Conversion tracked');
-  } else {
-    console.warn(' gtag is not defined yet');
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', 'conversion', {
+        send_to: 'AW-17014939967/JzZ2CL-5oboaEL_CrbE_',
+        value: 1.0,
+        currency: 'INR',
+      });
+      console.log(' Conversion tracked');
+    } else {
+      console.warn(' gtag is not defined yet');
+    }
+
+
+  };
+
+  const handelBookNow = () => {
+    router.push('/Form');
   }
 
- 
-};
+  const handelCallNow = () => {
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', 'schedule_consultation', {
+        send_to: 'AW-17014939967/JzZ2CL-5oboaEL_CrbE_',
+        value: 1.0,
+        currency: 'INR',
+      });
+      console.log('Conversion tracked: schedule_consultation');
+    } else {
+      console.warn('gtag is not defined yet');
+    }
+  };
 
-
-
-const handelCallNow = () => {
-  if (typeof window.gtag === 'function') {
-    window.gtag('event', 'schedule_consultation', {
-      send_to: 'AW-17014939967/JzZ2CL-5oboaEL_CrbE_',
-      value: 1.0,
-      currency: 'INR',
-    });
-    console.log('Conversion tracked: schedule_consultation');
-  } else {
-    console.warn('gtag is not defined yet');
-  }
-};
-
-const handelWhatsApp = () => {
-  if (typeof window.gtag === 'function') {
-    window.gtag('event', 'schedule_consultation', {
-      send_to: 'AW-17014939967/JzZ2CL-5oboaEL_CrbE_',
-      value: 1.0,
-      currency: 'INR',
-    });
-    console.log('Conversion tracked: schedule_consultation');
-  } else {
-    console.warn('gtag is not defined yet');
-  }
-};
+  const handelWhatsApp = () => {
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', 'schedule_consultation', {
+        send_to: 'AW-17014939967/JzZ2CL-5oboaEL_CrbE_',
+        value: 1.0,
+        currency: 'INR',
+      });
+      console.log('Conversion tracked: schedule_consultation');
+    } else {
+      console.warn('gtag is not defined yet');
+    }
+  };
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const router = useRouter();
+
+
+
+   const [showForm, setShowForm] = useState(false);
+  const [phone, setPhone] = useState('');
+
+  const handleBookNow = () => {
+    setShowForm(true);
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    try {
+      const res = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phone }),
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        alert('Success! Your number has been sent.');
+        setPhone('');
+      } else {
+        alert('Failed to send email. Please try again later.');
+      }
+    } catch (error) {
+      console.error('Error sending email:', error);
+      alert('Something went wrong.');
+    }
+  };
+
+
+
 
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
       <header className="bg-white shadow-sm border-b sticky top-0 z-50">
-      <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-        {/* Logo */}
-        <div className="flex items-center space-x-3" >
-          <a href="#annual_flu">
-          <Image
-            src="/images/dr-morepen-logo.png"
-            alt="Dr. Morepen Home Logo"
-            width={180}
-            height={60}
-            className="h-12 w-auto"
-          />
-          </a>
-        </div>
+        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+          {/* Logo */}
+          <div className="flex items-center space-x-3" >
+            <a href="#annual_flu">
+              <Image
+                src="/images/dr-morepen-logo.png"
+                alt="Dr. Morepen Home Logo"
+                width={180}
+                height={60}
+                className="h-12 w-auto"
+              />
+            </a>
+          </div>
 
-        {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center space-x-6">
-          {[
-            ['#what-are-flu-shots', 'About Flu Shots'],
-            ['#why-yearly', 'Why Yearly'],
-            ['#who-should-get', 'Who Needs It'],
-            ['#effectiveness', 'Effectiveness'],
-            ['#myths', 'Myths'],
-            ['#faq', 'FAQ'],
-          ].map(([href, label]) => (
-            <Link
-              key={href}
-              href={href}
-              className="text-gray-600 hover:text-blue-600 transition-colors"
-            >
-              {label}
-            </Link>
-          ))}
-        </nav>
+          {/* Desktop Nav */}
+          <nav className="hidden md:flex items-center space-x-6">
+            {[
+              ['#what-are-flu-shots', 'About Flu Shots'],
+              ['#why-yearly', 'Why Yearly'],
+              ['#who-should-get', 'Who Needs It'],
+              ['#effectiveness', 'Effectiveness'],
+              ['#myths', 'Myths'],
+              ['#faq', 'FAQ'],
+            ].map(([href, label]) => (
+              <Link
+                key={href}
+                href={href}
+                className="text-gray-600 hover:text-blue-600 transition-colors"
+              >
+                {label}
+              </Link>
+            ))}
+          </nav>
 
-        <div className="flex flex-row pt-2" style={{ gap: '5px' }}>
 
+          <div className="flex flex-row space-y-0 pt-2 lg:gap-2">
             <a href="tel:9570009000">
-                  <Button className="w-auto sm:w-[80px] lg:w-full bg-blue-600 hover:bg-blue-700 text-white" onClick={handelCallNow}>
-  <Phone className="w-3 h-4 mr-2" />
- <span className="hidden lg:inline ml-2">Call Now</span>
-</Button>
-
+              <Button className="w-[90%] sm:w-[102px] sm:gap-0 lg:w-full bg-blue-600 hover:bg-blue-700 text-white" onClick={handelCallNow}>
+                <Phone className="w-4 h-4 mr-2" />
+                <span className="hidden lg:inline ml-2">Call Now</span>
+              </Button>
             </a>
             <a
               href="https://wa.me/919570009000"
@@ -140,48 +180,53 @@ const handelWhatsApp = () => {
               rel="noopener noreferrer"
             >
               <Button className=" w-[80%] sm:w-[120px] w-full bg-green-600 hover:bg-green-700 text-white" onClick={handelWhatsApp}>
-                <FontAwesomeIcon icon={faWhatsapp} className="w-5 h-5 mr-0 sm:mr-2" />
-                 <span className="hidden lg:inline m">WhatsApp</span>
+                <FontAwesomeIcon icon={faWhatsapp} className="w-5 h-5 mr-2" />
+                <span className="hidden lg:inline ml-2">WhatsApp</span>
               </Button>
             </a>
-          </div> 
 
-        {/* Hamburger Icon */}
-        <div className="md:hidden mt-5" >
-          <button
-            onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}
-            className="text-gray-700 focus:outline-none"
-          >
-            {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
-        </div>
-      </div>
 
-      {/* Mobile Menu */}
-      {isMobileMenuOpen && (
-        <div className="md:hidden px-4 pb-4 space-y-3">
-          {[
-            ['#what-are-flu-shots', 'About Flu Shots'],
-            ['#why-yearly', 'Why Yearly'],
-            ['#who-should-get', 'Who Needs It'],
-            ['#effectiveness', 'Effectiveness'],
-            ['#myths', 'Myths'],
-            ['#faq', 'FAQ'],
-          ].map(([href, label]) => (
-            <Link
-              key={href}
-              href={href}
-              className="block text-gray-700 hover:text-blue-600 transition-colors"
-              onClick={() => setMobileMenuOpen(false)}
+            <Button className="w-[90%] sm:w-[102px] sm:gap-0 lg:w-full bg-blue-600 hover:bg-blue-700 text-white" >
+              Book Now
+            </Button>
+          </div>
+
+          {/* Hamburger Icon */}
+          <div className="md:hidden mt-5" >
+            <button
+              onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}
+              className="text-gray-700 focus:outline-none"
             >
-              {label}
-            </Link>
-          ))}
-
-          
+              {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
+          </div>
         </div>
-      )}
-    </header>
+
+        {/* Mobile Menu */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden px-4 pb-4 space-y-3">
+            {[
+              ['#what-are-flu-shots', 'About Flu Shots'],
+              ['#why-yearly', 'Why Yearly'],
+              ['#who-should-get', 'Who Needs It'],
+              ['#effectiveness', 'Effectiveness'],
+              ['#myths', 'Myths'],
+              ['#faq', 'FAQ'],
+            ].map(([href, label]) => (
+              <Link
+                key={href}
+                href={href}
+                className="block text-gray-700 hover:text-blue-600 transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {label}
+              </Link>
+            ))}
+
+
+          </div>
+        )}
+      </header>
 
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-blue-50 via-white to-orange-50 py-20" id="annual_flu">
@@ -227,7 +272,7 @@ const handelWhatsApp = () => {
                   <Button
                     size="lg"
                     className="bg-blue-600 hover:bg-blue-700 text-lg px-8 py-4"
-                 onClick={handleCallClick} >
+                    onClick={handleCallClick} >
                     <Phone className="w-4 h-4 mr-2  text-white" />
                     Call Now
                   </Button>
@@ -249,7 +294,39 @@ const handelWhatsApp = () => {
                     />
                     WhatsApp
                   </Button>
+
                 </a>
+
+ <div>
+      {!showForm && (
+        <Button
+          className="bg-blue-600 hover:bg-blue-700 text-white text-lg px-8 py-4"
+          onClick={handleBookNow}
+        >
+          Book Now
+        </Button>
+      )}
+
+      {showForm && (
+        <form onSubmit={handleSubmit} className="flex flex-row gap-2 max-w-sm">
+          <input
+            type="text"
+            placeholder="Enter your number"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            className="border px-4 py-2 rounded"
+            required
+          />
+          <button
+            type="submit"
+            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded"
+          >
+            Submit
+          </button>
+        </form>
+      )}
+    </div>
+
               </div>
 
               {/* Statistics for trust */}
@@ -1304,7 +1381,7 @@ const handelWhatsApp = () => {
               your flu shot at home, today
             </p>
             <div id="flu-shot-section" className="flex flex-col items-center ">
-        <div className="flex flex-col lg:flex-row gap-6 mb-12">
+              <div className="flex flex-col lg:flex-row gap-6 mb-12">
 
                 <div>
                   <a href="https://wa.me/919570009000">
@@ -1316,7 +1393,7 @@ const handelWhatsApp = () => {
                         icon={faWhatsapp}
                         className="w-6 h-6 mr-3"
                       />
-                       WhatsApp
+                      WhatsApp
                     </Button>
                   </a>
                 </div>
@@ -1366,10 +1443,10 @@ const handelWhatsApp = () => {
                 height={60}
                 className="h-12 w-auto mb-4 brightness-0 invert"
               />
-      <p className="text-gray-400 text-sm mb-4 lg:w-64">
+              <p className="text-gray-400 text-sm mb-4 lg:w-64">
 
                 Providing professional flu vaccination services in the comfort
-                of your home 
+                of your home
               </p>
 
               <div className="flex space-x-4">
