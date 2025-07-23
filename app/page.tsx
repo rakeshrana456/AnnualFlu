@@ -308,7 +308,7 @@ export default function AnnualFluShots() {
       )}
 
       {showForm && (
-        <form onSubmit={handleSubmit} className="flex flex-row gap-2 max-w-sm">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-2 max-w-sm">
           <input
             type="text"
             placeholder="Enter your number"
