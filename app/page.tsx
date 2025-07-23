@@ -300,6 +300,8 @@ export default function AnnualFluShots() {
  <div>
       {!showForm && (
         <Button
+           size="lg"
+                    variant="outline"
           className="bg-blue-600 hover:bg-blue-700 text-white text-lg px-8 py-4"
           onClick={handleBookNow}
         >
