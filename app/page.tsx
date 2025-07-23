@@ -186,9 +186,9 @@ export default function AnnualFluShots() {
             </a>
 
 
-            <Button className="w-[90%] sm:w-[102px] sm:gap-0 lg:w-full bg-blue-600 hover:bg-blue-700 text-white" >
+{/*             <Button className="w-[90%] sm:w-[102px] sm:gap-0 lg:w-full bg-blue-600 hover:bg-blue-700 text-white" >
               Book Now
-            </Button>
+            </Button> */}
           </div>
 
           {/* Hamburger Icon */}
