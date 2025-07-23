@@ -130,7 +130,7 @@ const handelWhatsApp = () => {
             <a href="tel:9570009000">
                   <Button className="w-auto sm:w-[80px] lg:w-full bg-blue-600 hover:bg-blue-700 text-white" onClick={handelCallNow}>
   <Phone className="w-3 h-4 mr-2" />
- <span className="hidden lg:inline ml-2">Call Now</span>
+ <span className="hidden lg:inline ml-2">Call Now bbbb</span>
 </Button>
 
             </a>
